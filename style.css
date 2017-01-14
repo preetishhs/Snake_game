@@ -1,0 +1,48 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	font-size: 32px;
+}
+body {
+	background-image:url('banner5.jpg');
+	color:white;
+}
+.board {
+	background-image: url('board1.jpg');
+	width:900px;;
+	height:900px;
+	border:2px solid black;
+	background-size: 900px;
+	float:left;
+}
+
+.outer-block {
+	border: 2px solid black;
+	width: 840px;
+	height: 700px;
+	margin-left: 23px;
+	margin-top: 100px;
+}
+.row {
+	width: 140px;
+	height: 140px;
+	//border:1px solid red;
+	//background-color: red;
+	float:left;
+}
+
+.pawn {
+	margin-left:20px;
+	margin-top:20px;
+	width: 100px;
+	height:100px;
+}
+
+.playArea {
+	float: left;
+	padding: 50px;
+}
+
+.contents p {
+	font-size: 40px;
+}

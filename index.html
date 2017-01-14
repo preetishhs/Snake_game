@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Snake and ladder </title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script>
+		var player = 1, pos =[0,0,0,0,0,0];
+		var id1,id2;
+var board_size = 30;
+var snake_table = [[17,4],[19,7],[21,9],[27,1]];
+var ladder_table = [[3,22],[5,8],[11,26],[20,29]];
+function play() {
+	var score = Math.floor((Math.random() * 10)%6 + 1);
+	var value = pos[player] + score;
+	var shift_pos,move_up = true, jump = false,snake = false,ladder = false;
+	document.getElementById("dice").innerHTML = "Dice Roll Value:" + score;
+	if(value > board_size)
+	{
+		//not possible
+		document.getElementById("msg").innerHTML = "Move not possible! Try again!";
+		return;
+	}
+	
+	if(value === board_size)
+	{
+		//won the game
+		document.getElementById("msg").innerHTML = "You Won the Match!";
+		document.getElementById("msg").style.fontSize = "50px";
+		document.getElementById(id2).innerHTML = "";
+		document.getElementById("b30").innerHTML = '<img src="pawn.png" class="pawn">';
+		document.getElementById("contents").style.visibility = "hidden";
+		return;
+	}
+	
+	for(var i = 0; i < 4; i++) {
+		var j = 0;
+		if(value === snake_table[i][j]) {
+			shift_pos = snake_table[i][j+1];
+			move_up = true;
+			jump = true;
+			snake = true;
+			document.getElementById("snake").innerHTML = "Snake Bite: Yes";
+			break;
+		}
+		if(value === ladder_table[i][j]) {
+			shift_pos = ladder_table[i][j+1];
+			move_up = false;
+			jump = true;
+			ladder = true;
+			document.getElementById("ladder").innerHTML = "Climbed Ladder: Yes";
+			break;
+		}
+	}
+	if(!ladder)
+	{
+		document.getElementById("ladder").innerHTML = "Climbed Ladder: No";
+	}
+	if(!snake)
+	{
+		document.getElementById("snake").innerHTML = "Snake Bite: No";
+	}
+	move(shift_pos,move_up, value, jump);
+}
+
+function move(shift_pos,move_up,value,jump) {
+	if(1) {
+		var n = value;
+		if(jump) {
+			n = shift_pos;
+		}
+		id2 = "b" + n;
+		id1 = "b" + pos[player];
+		pos[player] = n;
+		
+		document.getElementById(id1).innerHTML = "";
+		document.getElementById(id2).innerHTML = '<img src="pawn.png" class="pawn">';
+		document.getElementById("position").innerHTML = "Current Position: "+pos[player];
+		document.getElementById("msg").innerHTML = "Go on! Keep playing";
+	}
+}
+		</script>
+		<style>
+			#dice {
+			display:block;
+			}
+		</style>
+	</head>
+	<body>
+		<div class = "container">
+			<div class = "board">
+				<div class="outer-block">
+					<div id="b25" class="row"></div>
+					<div id="b26" class="row"></div>
+					<div id="b27" class="row"></div>
+					<div id="b28" class="row"></div>
+					<div id="b29" class="row"></div>
+					<div id="b30" class="row"></div>
+					
+					<div id="b24" class="row"></div>
+					<div id="b23" class="row"></div>
+					<div id="b22" class="row"></div>
+					<div id="b21" class="row"></div>
+					<div id="b20" class="row"></div>
+					<div id="b19" class="row"></div>
+					
+					<div id="b13" class="row"></div>
+					<div id="b14" class="row"></div>
+					<div id="b15" class="row"></div>
+					<div id="b16" class="row"></div>
+					<div id="b17" class="row"></div>
+					<div id="b18" class="row"></div>
+					
+					<div id="b12" class="row"></div>
+					<div id="b11" class="row"></div>
+					<div id="b10" class="row"></div>
+					<div id="b9" class="row"></div>
+					<div id="b8" class="row"></div>
+					<div id="b7" class="row"></div>
+					
+					<div id="b1" class="row"></div>
+					<div id="b2" class="row"></div>
+					<div id="b3" class="row"></div>
+					<div id="b4" class="row"></div>
+					<div id="b5" class="row"></div>
+					<div id="b6" class="row"></div>
+					
+					<div id="b0" style="">
+							<img src="pawn.png" class="pawn">
+					</div>
+				</div>
+			</div>
+			<div class = "playArea">
+				<div  class="contents">
+					<p> Player 1's Turn</p>
+					<br>
+					<button onclick ="play()" style="width:270px;">Play</button>
+					<br><br>
+					<p id="dice"> Dice Roll Value: </p><br>
+					<p id="position"> Current Position: 0 </p>
+					<p id="ladder"> Climbed Ladder:</p>
+					<p id="snake"> snake bite:</p>
+				</div>
+				<br><br><br>
+				<p id="msg"> Press "Play" button to start playing </p>
+			</div>
+		</div>
+	</body>
+</html>
